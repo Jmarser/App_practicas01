@@ -1,8 +1,10 @@
-package com.jmarser.app_practicas01;
+package com.jmarser.app_practicas01.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.jmarser.app_practicas01.R;
 
 public class MainActivity extends AppCompatActivity {
 
