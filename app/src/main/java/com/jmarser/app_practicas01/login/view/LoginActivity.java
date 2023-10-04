@@ -3,6 +3,7 @@ package com.jmarser.app_practicas01.login.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -13,15 +14,25 @@ import com.jmarser.app_practicas01.databinding.ActivityMainBinding;
 import com.jmarser.app_practicas01.di.appComponent.AppComponent;
 import com.jmarser.app_practicas01.di.appComponent.DaggerAppComponent;
 import com.jmarser.app_practicas01.di.appModule.AppModule;
+import com.jmarser.app_practicas01.di.appModule.SharedPreferencesModule;
+import com.jmarser.app_practicas01.login.presenter.LoginPresenter;
 import com.jmarser.app_practicas01.main.MainActivity;
 import com.jmarser.app_practicas01.utils.Constantes;
 import com.jmarser.app_practicas01.utils.ErrorView;
 
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 public class LoginActivity extends AppCompatActivity implements LoginView, ErrorView, View.OnClickListener {
 
     private ActivityLoginBinding binding;
+
+    @Inject
+    SharedPreferences sharedPreferences;
+
+    @Inject
+    LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Error
     private void initInjection(){
         AppComponent appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this, this))
+                .sharedPreferencesModule(new SharedPreferencesModule(this))
                 .build();
 
         appComponent.inject(this);
@@ -92,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Error
 
         if(idView == binding.btnLogin.getId()){
             showProgressBar();
-
+            presenter.tryToLogin(binding.tilEmail, binding.tilPassword);
         }
     }
 

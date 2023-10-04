@@ -1,5 +1,6 @@
 package com.jmarser.app_practicas01.login.presenter;
 
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Patterns;
 
@@ -8,6 +9,8 @@ import androidx.annotation.Nullable;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jmarser.app_practicas01.login.interactor.LoginInteractor;
 import com.jmarser.app_practicas01.login.view.LoginView;
+import com.jmarser.app_practicas01.login.view.SplashView;
+import com.jmarser.app_practicas01.utils.Constantes;
 import com.jmarser.app_practicas01.utils.ErrorView;
 
 import javax.inject.Inject;
@@ -22,8 +25,15 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnGet
     @Inject
     ErrorView errorView;
 
+    @Nullable
+    @Inject
+    SplashView splashView;
+
     @Inject
     LoginInteractor interactor;
+
+    @Inject
+    SharedPreferences sharedPreferences;
 
     private String email;
     private String password;
@@ -34,8 +44,12 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnGet
 
     @Override
     public void onSuccessLogin(String email, String password) {
+        sharedPreferences.edit().putString(Constantes.INTENT_EMAIL, email).apply();
+        sharedPreferences.edit().putString(Constantes.INTENT_PASSWORD, password).apply();
         if(loginView != null){
             loginView.goToLogin(email, password);
+        }else{
+            splashView.goToMain(email, password);
         }
     }
 
@@ -43,6 +57,9 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnGet
     public void onErrorLogin() {
         if(loginView != null){
             errorView.showErrorMessage("Error de login");
+        }else{
+            sharedPreferences.edit().clear().apply();
+            splashView.goToLogin();
         }
     }
 
@@ -75,5 +92,12 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnGet
         }else{
             errorView.showError();
         }
+    }
+
+    @Override
+    public void splashLogin() {
+        email = sharedPreferences.getString(Constantes.INTENT_EMAIL, "");
+        password = sharedPreferences.getString(Constantes.INTENT_PASSWORD, "");
+        interactor.tryToLogin(email, password, this);
     }
 }
