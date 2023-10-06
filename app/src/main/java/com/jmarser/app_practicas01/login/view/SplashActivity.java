@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 
-import com.jmarser.app_practicas01.R;
 import com.jmarser.app_practicas01.databinding.ActivitySplashBinding;
 import com.jmarser.app_practicas01.di.appComponent.AppComponent;
+
 import com.jmarser.app_practicas01.di.appComponent.DaggerAppComponent;
 import com.jmarser.app_practicas01.di.appModule.AppModule;
 import com.jmarser.app_practicas01.di.appModule.SharedPreferencesModule;

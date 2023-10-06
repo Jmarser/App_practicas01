@@ -13,18 +13,25 @@ import com.jmarser.app_practicas01.login.view.LoginView;
 import com.jmarser.app_practicas01.login.view.SplashActivity;
 import com.jmarser.app_practicas01.login.view.SplashView;
 import com.jmarser.app_practicas01.main.MainActivity;
+import com.jmarser.app_practicas01.usuarios.interactor.UsuariosInteractor;
+import com.jmarser.app_practicas01.usuarios.interactor.UsuariosInteractorImpl;
+import com.jmarser.app_practicas01.usuarios.presenter.UsuariosPresenter;
+import com.jmarser.app_practicas01.usuarios.presenter.UsuariosPresenterImpl;
+import com.jmarser.app_practicas01.usuarios.view.UsuariosFragment;
+import com.jmarser.app_practicas01.usuarios.view.UsuariosView;
 import com.jmarser.app_practicas01.utils.ErrorView;
 
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes = {SharedPreferencesModule.class})
+@Module(includes = {SharedPreferencesModule.class, ConnectionModule.class})
 public class AppModule {
 
     /* Propiedades */
     private SplashActivity splashActivity;
     private LoginActivity loginActivity;
     private MainActivity mainActivity;
+    private UsuariosFragment usuariosFragment;
 
     private Context context;
 
@@ -46,6 +53,11 @@ public class AppModule {
 
     public AppModule(MainActivity mainActivity, Context context) {
         this.mainActivity = mainActivity;
+        this.context = context;
+    }
+
+    public AppModule(UsuariosFragment usuariosFragment, Context context) {
+        this.usuariosFragment = usuariosFragment;
         this.context = context;
     }
 
@@ -80,11 +92,22 @@ public class AppModule {
 
     @Nullable
     @Provides
+    public UsuariosView usuariosFragment(){
+        if(usuariosFragment != null){
+            return usuariosFragment;
+        }
+        return null;
+    }
+
+    @Nullable
+    @Provides
     public ErrorView provideErrorView(){
         if(splashActivity != null){
             return splashActivity;
         }else if(loginActivity != null){
             return loginActivity;
+        }else if(usuariosFragment != null){
+            return usuariosFragment;
         }
         return null;
     }
@@ -96,10 +119,20 @@ public class AppModule {
         return presenter;
     }
 
+    @Provides
+    UsuariosPresenter providesUsuariosPresenter(UsuariosPresenterImpl presenter){
+        return presenter;
+    }
+
     /* Interactors */
 
     @Provides
     public LoginInteractor providesLoginInteractor(LoginInteractorImpl interactor){
+        return interactor;
+    }
+
+    @Provides
+    public UsuariosInteractor providesUsuariosInteractor(UsuariosInteractorImpl interactor){
         return interactor;
     }
 }

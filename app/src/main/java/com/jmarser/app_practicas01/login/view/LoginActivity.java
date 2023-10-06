@@ -1,16 +1,14 @@
 package com.jmarser.app_practicas01.login.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.jmarser.app_practicas01.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.jmarser.app_practicas01.databinding.ActivityLoginBinding;
-import com.jmarser.app_practicas01.databinding.ActivityMainBinding;
 import com.jmarser.app_practicas01.di.appComponent.AppComponent;
 import com.jmarser.app_practicas01.di.appComponent.DaggerAppComponent;
 import com.jmarser.app_practicas01.di.appModule.AppModule;

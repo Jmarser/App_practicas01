@@ -6,6 +6,7 @@ import com.jmarser.app_practicas01.di.appModule.SharedPreferencesModule;
 import com.jmarser.app_practicas01.login.view.LoginActivity;
 import com.jmarser.app_practicas01.login.view.SplashActivity;
 import com.jmarser.app_practicas01.main.MainActivity;
+import com.jmarser.app_practicas01.usuarios.view.UsuariosFragment;
 
 import javax.inject.Singleton;
 
@@ -20,4 +21,6 @@ public interface AppComponent {
     void inject(LoginActivity loginActivity);
 
     void inject(MainActivity mainActivity);
+
+    void inject(UsuariosFragment usuariosFragment);
 }

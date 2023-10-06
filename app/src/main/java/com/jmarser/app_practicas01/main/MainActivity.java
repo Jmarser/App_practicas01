@@ -1,15 +1,15 @@
 package com.jmarser.app_practicas01.main;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.jmarser.app_practicas01.R;
@@ -23,7 +23,6 @@ import com.jmarser.app_practicas01.portadas.view.PortadasFragment;
 import com.jmarser.app_practicas01.usuarios.view.UsuariosFragment;
 import com.jmarser.app_practicas01.utils.NavFragment;
 
-import java.util.Objects;
 import java.util.Stack;
 
 import javax.inject.Inject;
