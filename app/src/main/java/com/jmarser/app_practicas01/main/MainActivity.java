@@ -48,9 +48,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //Ocultamos la actionBar de la actividad
-        Objects.requireNonNull(getSupportActionBar()).hide();
-
         initInjection();
 
         initListener();
