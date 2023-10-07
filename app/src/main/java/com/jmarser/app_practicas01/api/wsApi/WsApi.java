@@ -1,5 +1,6 @@
 package com.jmarser.app_practicas01.api.wsApi;
 
+import com.jmarser.app_practicas01.api.models.Album;
 import com.jmarser.app_practicas01.api.models.User;
 import com.jmarser.app_practicas01.utils.Constantes;
 
@@ -18,6 +19,12 @@ public interface WsApi {
     @GET(Constantes.GET_USERS)
     Call<List<User>> getAllUsers();
 
+    @GET(Constantes.GET_ALBUMS)
+    Call<List<Album>> getAllAlbums();
+
+    @GET(Constantes.GET_ALBUMS_FOR_USER)
+    Call<List<Album>> getAlbumsForUser(@Path("userId") int userId);
+
 /*    @GET(Constantes.GET_POSTS)
     Call<List<Post>> getPostsForUserId(@Query("userId") int userId);
 
@@ -27,11 +34,9 @@ public interface WsApi {
     @GET(Constantes.GET_COMMENTS)
     Call<List<Comment>> getCommentsForPostId(@Query("postId") int postId);
 
-    @GET(Constantes.GET_ALBUMS)
-    Call<List<Album>> getAllAlbums();
 
-    @GET(Constantes.GET_ALBUMS_FOR_USER)
-    Call<List<Album>> getAlbumsForUser(@Path("userId") int userId);
+
+
 
     @GET(Constantes.GET_PHOTOS)
     Call<List<Portada>> getPortadas();

@@ -4,6 +4,12 @@ import android.content.Context;
 
 import androidx.annotation.Nullable;
 
+import com.jmarser.app_practicas01.albunes.interactor.AlbunesInteractor;
+import com.jmarser.app_practicas01.albunes.interactor.AlbunesInteractorImpl;
+import com.jmarser.app_practicas01.albunes.presenter.AlbunesPresenter;
+import com.jmarser.app_practicas01.albunes.presenter.AlbunesPresenterImpl;
+import com.jmarser.app_practicas01.albunes.view.AlbunesFragment;
+import com.jmarser.app_practicas01.albunes.view.AlbunesView;
 import com.jmarser.app_practicas01.login.interactor.LoginInteractor;
 import com.jmarser.app_practicas01.login.interactor.LoginInteractorImpl;
 import com.jmarser.app_practicas01.login.presenter.LoginPresenter;
@@ -32,6 +38,7 @@ public class AppModule {
     private LoginActivity loginActivity;
     private MainActivity mainActivity;
     private UsuariosFragment usuariosFragment;
+    private AlbunesFragment albunesFragment;
 
     private Context context;
 
@@ -58,6 +65,11 @@ public class AppModule {
 
     public AppModule(UsuariosFragment usuariosFragment, Context context) {
         this.usuariosFragment = usuariosFragment;
+        this.context = context;
+    }
+
+    public AppModule(AlbunesFragment albunesFragment, Context context) {
+        this.albunesFragment = albunesFragment;
         this.context = context;
     }
 
@@ -101,6 +113,15 @@ public class AppModule {
 
     @Nullable
     @Provides
+    public AlbunesView albunesFragment(){
+        if (albunesFragment != null){
+            return albunesFragment;
+        }
+        return null;
+    }
+
+    @Nullable
+    @Provides
     public ErrorView provideErrorView(){
         if(splashActivity != null){
             return splashActivity;
@@ -108,6 +129,8 @@ public class AppModule {
             return loginActivity;
         }else if(usuariosFragment != null){
             return usuariosFragment;
+        }else if (albunesFragment != null){
+            return albunesFragment;
         }
         return null;
     }
@@ -120,7 +143,12 @@ public class AppModule {
     }
 
     @Provides
-    UsuariosPresenter providesUsuariosPresenter(UsuariosPresenterImpl presenter){
+    public UsuariosPresenter providesUsuariosPresenter(UsuariosPresenterImpl presenter){
+        return presenter;
+    }
+
+    @Provides
+    public AlbunesPresenter providesAlbunesPresenter(AlbunesPresenterImpl presenter){
         return presenter;
     }
 
@@ -133,6 +161,11 @@ public class AppModule {
 
     @Provides
     public UsuariosInteractor providesUsuariosInteractor(UsuariosInteractorImpl interactor){
+        return interactor;
+    }
+
+    @Provides
+    public AlbunesInteractor providesAlbunesInteractor(AlbunesInteractorImpl interactor){
         return interactor;
     }
 }

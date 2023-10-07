@@ -1,6 +1,7 @@
 package com.jmarser.app_practicas01.di.appComponent;
 
 
+import com.jmarser.app_practicas01.albunes.view.AlbunesFragment;
 import com.jmarser.app_practicas01.di.appModule.AppModule;
 import com.jmarser.app_practicas01.di.appModule.SharedPreferencesModule;
 import com.jmarser.app_practicas01.login.view.LoginActivity;
@@ -23,4 +24,6 @@ public interface AppComponent {
     void inject(MainActivity mainActivity);
 
     void inject(UsuariosFragment usuariosFragment);
+
+    void inject(AlbunesFragment albunesFragment);
 }
