@@ -27,8 +27,12 @@ import com.jmarser.app_practicas01.portadas.view.PortadasFragment;
 import com.jmarser.app_practicas01.portadas.view.PortadasView;
 import com.jmarser.app_practicas01.usuarios.interactor.UsuariosInteractor;
 import com.jmarser.app_practicas01.usuarios.interactor.UsuariosInteractorImpl;
+import com.jmarser.app_practicas01.usuarios.presenter.UsuarioDetailsPresenter;
+import com.jmarser.app_practicas01.usuarios.presenter.UsuarioDetailsPresenterImpl;
 import com.jmarser.app_practicas01.usuarios.presenter.UsuariosPresenter;
 import com.jmarser.app_practicas01.usuarios.presenter.UsuariosPresenterImpl;
+import com.jmarser.app_practicas01.usuarios.view.UsuarioDetailActivity;
+import com.jmarser.app_practicas01.usuarios.view.UsuarioDetailsView;
 import com.jmarser.app_practicas01.usuarios.view.UsuariosFragment;
 import com.jmarser.app_practicas01.usuarios.view.UsuariosView;
 import com.jmarser.app_practicas01.utils.ErrorView;
@@ -46,6 +50,7 @@ public class AppModule {
     private UsuariosFragment usuariosFragment;
     private AlbunesFragment albunesFragment;
     private PortadasFragment portadasFragment;
+    private UsuarioDetailActivity usuarioDetailActivity;
 
     private Context context;
 
@@ -82,6 +87,11 @@ public class AppModule {
 
     public AppModule(PortadasFragment portadasFragment, Context context) {
         this.portadasFragment = portadasFragment;
+        this.context = context;
+    }
+
+    public AppModule(UsuarioDetailActivity usuarioDetailActivity, Context context) {
+        this.usuarioDetailActivity = usuarioDetailActivity;
         this.context = context;
     }
 
@@ -143,6 +153,15 @@ public class AppModule {
 
     @Nullable
     @Provides
+    public UsuarioDetailsView usuarioDetailsActivity(){
+        if (usuarioDetailActivity != null){
+            return usuarioDetailActivity;
+        }
+        return null;
+    }
+
+    @Nullable
+    @Provides
     public ErrorView provideErrorView(){
         if(splashActivity != null){
             return splashActivity;
@@ -154,6 +173,8 @@ public class AppModule {
             return albunesFragment;
         }else if (portadasFragment != null){
             return portadasFragment;
+        }else if (usuarioDetailActivity != null){
+            return usuarioDetailActivity;
         }
         return null;
     }
@@ -177,6 +198,11 @@ public class AppModule {
 
     @Provides
     public PortadasPresenter providesPortadasPresenter(PortadasPresenterImpl presenter){
+        return presenter;
+    }
+
+    @Provides
+    public UsuarioDetailsPresenter ProvidesUsuarioDetailsPresenter(UsuarioDetailsPresenterImpl presenter){
         return presenter;
     }
 

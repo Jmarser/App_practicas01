@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-public class UsuariosPresenterImpl implements UsuariosPresenter, UsuariosInteractor.OnGetUsersCallBack{
+public class UsuariosPresenterImpl implements UsuariosPresenter, UsuariosInteractor.OnGetUsersCallBack, UsuariosInteractor.OnErrorServer{
 
     @Inject
     UsuariosInteractor usuariosInteractor;
@@ -30,7 +30,7 @@ public class UsuariosPresenterImpl implements UsuariosPresenter, UsuariosInterac
 
     @Override
     public void getUsers() {
-        usuariosInteractor.getUsers(this);
+        usuariosInteractor.getUsers(this, this);
     }
 
     @Override
