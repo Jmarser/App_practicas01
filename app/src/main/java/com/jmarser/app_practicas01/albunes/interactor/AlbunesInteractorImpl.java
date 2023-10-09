@@ -36,7 +36,7 @@ public class AlbunesInteractorImpl implements AlbunesInteractor{
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if(response.isSuccessful()){
                     callBack.onSuccessGetAllUsers(new ArrayList<User>(response.body()));
-                    callBack.onSuccessGetAllUsers(null);
+                    //callBack.onSuccessGetAllUsers(null);
                     //errorServer.onErrorServer();
                 }else{
                     callBack.onErrorGetAllUsers();

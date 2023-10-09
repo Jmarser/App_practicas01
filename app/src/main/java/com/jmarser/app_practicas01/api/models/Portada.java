@@ -1,4 +1,4 @@
-package com.jmarser.alumnospracticas_1.api.models;
+package com.jmarser.app_practicas01.api.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

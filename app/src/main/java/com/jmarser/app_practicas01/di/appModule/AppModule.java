@@ -19,6 +19,12 @@ import com.jmarser.app_practicas01.login.view.LoginView;
 import com.jmarser.app_practicas01.login.view.SplashActivity;
 import com.jmarser.app_practicas01.login.view.SplashView;
 import com.jmarser.app_practicas01.main.MainActivity;
+import com.jmarser.app_practicas01.portadas.interactor.PortadasInteractor;
+import com.jmarser.app_practicas01.portadas.interactor.PortadasInteractorImpl;
+import com.jmarser.app_practicas01.portadas.presenter.PortadasPresenter;
+import com.jmarser.app_practicas01.portadas.presenter.PortadasPresenterImpl;
+import com.jmarser.app_practicas01.portadas.view.PortadasFragment;
+import com.jmarser.app_practicas01.portadas.view.PortadasView;
 import com.jmarser.app_practicas01.usuarios.interactor.UsuariosInteractor;
 import com.jmarser.app_practicas01.usuarios.interactor.UsuariosInteractorImpl;
 import com.jmarser.app_practicas01.usuarios.presenter.UsuariosPresenter;
@@ -39,6 +45,7 @@ public class AppModule {
     private MainActivity mainActivity;
     private UsuariosFragment usuariosFragment;
     private AlbunesFragment albunesFragment;
+    private PortadasFragment portadasFragment;
 
     private Context context;
 
@@ -70,6 +77,11 @@ public class AppModule {
 
     public AppModule(AlbunesFragment albunesFragment, Context context) {
         this.albunesFragment = albunesFragment;
+        this.context = context;
+    }
+
+    public AppModule(PortadasFragment portadasFragment, Context context) {
+        this.portadasFragment = portadasFragment;
         this.context = context;
     }
 
@@ -122,6 +134,15 @@ public class AppModule {
 
     @Nullable
     @Provides
+    public PortadasView portadasFragment(){
+        if (portadasFragment != null){
+            return portadasFragment;
+        }
+        return null;
+    }
+
+    @Nullable
+    @Provides
     public ErrorView provideErrorView(){
         if(splashActivity != null){
             return splashActivity;
@@ -131,6 +152,8 @@ public class AppModule {
             return usuariosFragment;
         }else if (albunesFragment != null){
             return albunesFragment;
+        }else if (portadasFragment != null){
+            return portadasFragment;
         }
         return null;
     }
@@ -152,6 +175,11 @@ public class AppModule {
         return presenter;
     }
 
+    @Provides
+    public PortadasPresenter providesPortadasPresenter(PortadasPresenterImpl presenter){
+        return presenter;
+    }
+
     /* Interactors */
 
     @Provides
@@ -166,6 +194,11 @@ public class AppModule {
 
     @Provides
     public AlbunesInteractor providesAlbunesInteractor(AlbunesInteractorImpl interactor){
+        return interactor;
+    }
+
+    @Provides
+    public PortadasInteractor providesPortadasInteractor(PortadasInteractorImpl interactor){
         return interactor;
     }
 }

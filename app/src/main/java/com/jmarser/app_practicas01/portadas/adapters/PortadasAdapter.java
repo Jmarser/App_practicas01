@@ -1,15 +1,14 @@
-package com.jmarser.alumnospracticas_1.portadas.adapters;
+package com.jmarser.app_practicas01.portadas.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.jmarser.alumnospracticas_1.api.models.Portada;
-import com.jmarser.alumnospracticas_1.databinding.RowPortadaBinding;
+import com.jmarser.app_practicas01.api.models.Portada;
+import com.jmarser.app_practicas01.databinding.RowPortadaBinding;
 
 import java.util.ArrayList;
 
