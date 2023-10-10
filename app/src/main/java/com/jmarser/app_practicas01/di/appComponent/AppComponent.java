@@ -8,6 +8,7 @@ import com.jmarser.app_practicas01.login.view.LoginActivity;
 import com.jmarser.app_practicas01.login.view.SplashActivity;
 import com.jmarser.app_practicas01.main.MainActivity;
 import com.jmarser.app_practicas01.portadas.view.PortadasFragment;
+import com.jmarser.app_practicas01.usuarios.view.PostDetailsActivity;
 import com.jmarser.app_practicas01.usuarios.view.UsuarioDetailActivity;
 import com.jmarser.app_practicas01.usuarios.view.UsuariosFragment;
 
@@ -32,4 +33,6 @@ public interface AppComponent {
     void inject(PortadasFragment portadasFragment);
 
     void inject(UsuarioDetailActivity usuarioDetailActivity);
+
+    void inject(PostDetailsActivity postDetailsActivity);
 }

@@ -1,11 +1,13 @@
 package com.jmarser.app_practicas01.api.wsApi;
 
 import com.jmarser.app_practicas01.api.models.Album;
+import com.jmarser.app_practicas01.api.models.Comment;
 import com.jmarser.app_practicas01.api.models.Portada;
 import com.jmarser.app_practicas01.api.models.Post;
 import com.jmarser.app_practicas01.api.models.Task;
 import com.jmarser.app_practicas01.api.models.User;
 import com.jmarser.app_practicas01.utils.Constantes;
+
 
 import java.util.List;
 
@@ -40,14 +42,7 @@ public interface WsApi {
     @GET(Constantes.GET_TODOS)
     Call<List<Task>> getTasks();
 
-/*
-    @GET(Constantes.GET_POSTS)
-    Call<List<Post>> getPostsForUserId(@Query("userId") int userId);
-
-    @GET(Constantes.GET_TODOS)
-    Call<List<Task>> getTasks();
-
     @GET(Constantes.GET_COMMENTS)
     Call<List<Comment>> getCommentsForPostId(@Query("postId") int postId);
-*/
+
 }

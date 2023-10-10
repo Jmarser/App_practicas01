@@ -1,8 +1,10 @@
 package com.jmarser.app_practicas01.usuarios.interactor;
 
+import com.jmarser.app_practicas01.api.models.Comment;
 import com.jmarser.app_practicas01.api.models.Post;
 import com.jmarser.app_practicas01.api.models.Task;
 import com.jmarser.app_practicas01.api.models.User;
+
 
 import java.util.ArrayList;
 
@@ -27,6 +29,13 @@ public interface UsuariosInteractor {
     interface OnGetTodosCallBack{
         void onSuccessGetTodos(ArrayList<Task> listadoTasks);
         void onErrorGetTodos();
+    }
+
+    void getCommentsForpstId(int postId, OnGetCommentsCallBack callBack, OnErrorServer errorServer);
+
+    interface OnGetCommentsCallBack{
+        void onSuccessGetComments(ArrayList<Comment> listadoComentarios);
+        void onErrorGetComments();
     }
 
     interface OnErrorServer{

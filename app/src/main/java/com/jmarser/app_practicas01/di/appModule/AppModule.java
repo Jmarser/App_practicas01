@@ -27,10 +27,14 @@ import com.jmarser.app_practicas01.portadas.view.PortadasFragment;
 import com.jmarser.app_practicas01.portadas.view.PortadasView;
 import com.jmarser.app_practicas01.usuarios.interactor.UsuariosInteractor;
 import com.jmarser.app_practicas01.usuarios.interactor.UsuariosInteractorImpl;
+import com.jmarser.app_practicas01.usuarios.presenter.PostDetailsPresenter;
+import com.jmarser.app_practicas01.usuarios.presenter.PostDetailsPresenterImpl;
 import com.jmarser.app_practicas01.usuarios.presenter.UsuarioDetailsPresenter;
 import com.jmarser.app_practicas01.usuarios.presenter.UsuarioDetailsPresenterImpl;
 import com.jmarser.app_practicas01.usuarios.presenter.UsuariosPresenter;
 import com.jmarser.app_practicas01.usuarios.presenter.UsuariosPresenterImpl;
+import com.jmarser.app_practicas01.usuarios.view.PostDetailsActivity;
+import com.jmarser.app_practicas01.usuarios.view.PostDetailsView;
 import com.jmarser.app_practicas01.usuarios.view.UsuarioDetailActivity;
 import com.jmarser.app_practicas01.usuarios.view.UsuarioDetailsView;
 import com.jmarser.app_practicas01.usuarios.view.UsuariosFragment;
@@ -51,6 +55,7 @@ public class AppModule {
     private AlbunesFragment albunesFragment;
     private PortadasFragment portadasFragment;
     private UsuarioDetailActivity usuarioDetailActivity;
+    private PostDetailsActivity postDetailsActivity;
 
     private Context context;
 
@@ -92,6 +97,11 @@ public class AppModule {
 
     public AppModule(UsuarioDetailActivity usuarioDetailActivity, Context context) {
         this.usuarioDetailActivity = usuarioDetailActivity;
+        this.context = context;
+    }
+
+    public AppModule(PostDetailsActivity postDetailsActivity, Context context) {
+        this.postDetailsActivity = postDetailsActivity;
         this.context = context;
     }
 
@@ -162,6 +172,15 @@ public class AppModule {
 
     @Nullable
     @Provides
+    public PostDetailsView postDetailsActivity(){
+        if (postDetailsActivity != null){
+            return postDetailsActivity;
+        }
+        return null;
+    }
+
+    @Nullable
+    @Provides
     public ErrorView provideErrorView(){
         if(splashActivity != null){
             return splashActivity;
@@ -175,6 +194,8 @@ public class AppModule {
             return portadasFragment;
         }else if (usuarioDetailActivity != null){
             return usuarioDetailActivity;
+        }else if (postDetailsActivity != null){
+            return postDetailsActivity;
         }
         return null;
     }
@@ -203,6 +224,11 @@ public class AppModule {
 
     @Provides
     public UsuarioDetailsPresenter ProvidesUsuarioDetailsPresenter(UsuarioDetailsPresenterImpl presenter){
+        return presenter;
+    }
+
+    @Provides
+    public PostDetailsPresenter providesPostDetailsPresenter(PostDetailsPresenterImpl presenter){
         return presenter;
     }
 

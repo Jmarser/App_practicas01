@@ -163,12 +163,12 @@ public class UsuarioDetailActivity extends AppCompatActivity implements UsuarioD
 
     @Override
     public void onItemPostClickListener(Post post) {
-        /*Bundle bundle = new Bundle();
+        Bundle bundle = new Bundle();
         bundle.putParcelable(Constantes.BUNDLE_POST, post);
 
-        Intent intent = new Intent(this, CommentsActivity.class);
+        Intent intent = new Intent(this, PostDetailsActivity.class);
         intent.putExtras(bundle);
-        startActivity(intent);*/
+        startActivity(intent);
     }
 
     @Override
