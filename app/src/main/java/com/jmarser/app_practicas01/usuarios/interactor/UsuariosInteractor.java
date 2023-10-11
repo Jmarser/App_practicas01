@@ -45,6 +45,13 @@ public interface UsuariosInteractor {
         void onErrorCreatePost();
     }
 
+    void editPost(int id, String title, String body, int userId, OnEditPostCallBack callBack, OnErrorServer errorServer);
+
+    interface OnEditPostCallBack{
+        void onSuccessEditPost(Post post);
+        void onErrorEditPost();
+    }
+
     interface OnErrorServer{
         void onErrorServer();
     }

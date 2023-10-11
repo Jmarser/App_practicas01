@@ -6,4 +6,5 @@ public interface CreatePostView {
 
     void successCreatePost(Post post);
 
+    void successEditPost(Post post);
 }

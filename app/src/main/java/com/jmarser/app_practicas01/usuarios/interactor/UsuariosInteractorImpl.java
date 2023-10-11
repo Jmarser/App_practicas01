@@ -129,4 +129,25 @@ public class UsuariosInteractorImpl implements UsuariosInteractor{
             }
         });
     }
+
+    @Override
+    public void editPost(int id, String title, String body, int userId, OnEditPostCallBack callBack, OnErrorServer errorServer) {
+        Call<Post> call = wsApi.editPost(id, id, title, body, userId);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (response.isSuccessful()){
+                    Log.i("POST_EDITADO", response.body().getTitle() + " " + response.body().getBody());
+                    callBack.onSuccessEditPost(response.body());
+                }else{
+                    callBack.onErrorEditPost();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                errorServer.onErrorServer();
+            }
+        });
+    }
 }

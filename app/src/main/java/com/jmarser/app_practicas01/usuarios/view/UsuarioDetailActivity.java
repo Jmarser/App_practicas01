@@ -197,6 +197,22 @@ public class UsuarioDetailActivity extends AppCompatActivity implements UsuarioD
     }
 
     @Override
+    public void onItemTaskClickListener(Task task) {
+        task.setCompleted(!task.isCompleted());
+        tasksAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClickBtnEdit(Post post) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constantes.BUNDLE_POST, post);
+
+        Intent editIntent = new Intent(this, CreatePostActivity.class);
+        editIntent.putExtras(bundle);
+        startActivity(editIntent);
+    }
+
+    @Override
     public void setPosts(ArrayList<Post> listadoPosts) {
         this.listadoPosts  =listadoPosts;
         initRecyclerPosts();
@@ -223,9 +239,4 @@ public class UsuarioDetailActivity extends AppCompatActivity implements UsuarioD
         binding.layoutError.clError.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void onItemTaskClickListener(Task task) {
-        task.setCompleted(!task.isCompleted());
-        tasksAdapter.notifyDataSetChanged();
-    }
 }

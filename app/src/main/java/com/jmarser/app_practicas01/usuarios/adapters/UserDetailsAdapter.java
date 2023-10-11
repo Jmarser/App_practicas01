@@ -8,7 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jmarser.app_practicas01.api.models.Post;
-import com.jmarser.app_practicas01.databinding.RowDetailsUserBinding;
+import com.jmarser.app_practicas01.databinding.RowPostBinding;
+
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
 
     private ArrayList<Post> listadoPosts;
     OnItemPostClickListener itemPostClickListener;
+
 
     public UserDetailsAdapter(ArrayList<Post> listadoPosts, OnItemPostClickListener itemPostClickListener) {
         this.listadoPosts = listadoPosts;
@@ -26,7 +28,7 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
     @Override
     public PostsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        RowDetailsUserBinding binding = RowDetailsUserBinding.inflate(inflater, parent, false);
+        RowPostBinding binding = RowPostBinding.inflate(inflater, parent, false);
         return new PostsViewHolder(binding);
     }
 
@@ -43,9 +45,9 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
 
     class PostsViewHolder extends RecyclerView.ViewHolder{
 
-        private RowDetailsUserBinding binding;
+        private RowPostBinding binding;
 
-        public PostsViewHolder(@NonNull RowDetailsUserBinding binding) {
+        public PostsViewHolder(@NonNull RowPostBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -59,10 +61,13 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
                     itemPostClickListener.onItemPostClickListener(post);
                 }
             });
+
+            binding.btnEditPost.setOnClickListener(v -> itemPostClickListener.onClickBtnEdit(post));
         }
     }
 
     public interface OnItemPostClickListener{
         void onItemPostClickListener(Post post);
+        void onClickBtnEdit(Post post);
     }
 }

@@ -81,7 +81,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="5dp"
-            tools:listitem="@layout/row_details_user"/>
+            tools:listitem="@layout/row_post"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

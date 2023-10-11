@@ -26,6 +26,7 @@ public class CreatePostActivity extends AppCompatActivity implements CreatePostV
     private ActivityCreatePostBinding binding;
     private ActionBar actionBar;
     private User user;
+    private Post post;
 
     @Inject
     SharedPreferences sharedPreferences;
@@ -44,7 +45,12 @@ public class CreatePostActivity extends AppCompatActivity implements CreatePostV
         initListener();
 
         Bundle bundle = getIntent().getExtras();
-        user = bundle.getParcelable(Constantes.BUNDLE_USUARIO);
+        if (bundle.getParcelable(Constantes.BUNDLE_USUARIO) != null){
+            user = bundle.getParcelable(Constantes.BUNDLE_USUARIO);
+        }else{
+            post = bundle.getParcelable(Constantes.BUNDLE_POST);
+            setFields();
+        }
 
         setContentView(binding.getRoot());
     }
@@ -85,6 +91,15 @@ public class CreatePostActivity extends AppCompatActivity implements CreatePostV
         });
     }
 
+    private void setFields(){
+        if (post != null){
+            actionBar.setTitle("Editar Post");
+            binding.btnCrearPost.setText("Editar post");
+            binding.tilTituloPost.getEditText().setText(post.getTitle());
+            binding.tilMensajePost.getEditText().setText(post.getBody());
+        }
+    }
+
     private void createPost(){
         binding.pbCreatePost.setVisibility(View.VISIBLE);
         binding.btnCrearPost.setVisibility(View.INVISIBLE);
@@ -102,7 +117,11 @@ public class CreatePostActivity extends AppCompatActivity implements CreatePostV
         int itemId = v.getId();
 
         if (itemId == binding.btnCrearPost.getId()){
-            createPost();
+            if (post == null) {
+                createPost();
+            }else{
+                createPostPresenter.editPost(binding.tilTituloPost, binding.tilMensajePost, post);
+            }
         }
 
         if (itemId == binding.layoutError.btnRetry.getId()){
@@ -116,6 +135,14 @@ public class CreatePostActivity extends AppCompatActivity implements CreatePostV
         binding.pbCreatePost.setVisibility(View.INVISIBLE);
         binding.btnCrearPost.setVisibility(View.VISIBLE);
         Toast.makeText(this, "Post creado correctamente.", Toast.LENGTH_LONG).show();
+        onSupportNavigateUp();
+    }
+
+    @Override
+    public void successEditPost(Post post) {
+        binding.pbCreatePost.setVisibility(View.INVISIBLE);
+        binding.btnCrearPost.setVisibility(View.VISIBLE);
+        Toast.makeText(this, "Post editado correctamente.", Toast.LENGTH_LONG).show();
         onSupportNavigateUp();
     }
 
