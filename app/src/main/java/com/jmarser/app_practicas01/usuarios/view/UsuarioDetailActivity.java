@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-public class UsuarioDetailActivity extends AppCompatActivity implements UsuarioDetailsView, ErrorView, View.OnClickListener, UserDetailsAdapter.OnItemPostClickListener {
+public class UsuarioDetailActivity extends AppCompatActivity implements UsuarioDetailsView, ErrorView, View.OnClickListener, UserDetailsAdapter.OnItemPostClickListener, TasksAdapter.OnItemTaskClickListener {
 
     private ActivityUsuarioDetailBinding binding;
     private User user;
@@ -132,7 +132,7 @@ public class UsuarioDetailActivity extends AppCompatActivity implements UsuarioD
     private void initRecyclerTodos(){
         binding.pbRecyclerTodos.setVisibility(View.GONE);
         if(listadoTodos != null && listadoTodos.size() > 0){
-            tasksAdapter = new TasksAdapter(listadoTodos);
+            tasksAdapter = new TasksAdapter(listadoTodos, this);
             tasksAdapter.filtrarTasksForUser(user);
             if(tasksAdapter.getItemCount() > 0){
                 binding.rvTodosUser.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -221,5 +221,11 @@ public class UsuarioDetailActivity extends AppCompatActivity implements UsuarioD
     @Override
     public void errorServer() {
         binding.layoutError.clError.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onItemTaskClickListener(Task task) {
+        task.setCompleted(!task.isCompleted());
+        tasksAdapter.notifyDataSetChanged();
     }
 }

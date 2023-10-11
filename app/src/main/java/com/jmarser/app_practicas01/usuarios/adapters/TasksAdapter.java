@@ -2,6 +2,7 @@ package com.jmarser.app_practicas01.usuarios.adapters;
 
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -18,10 +19,12 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
 
     private ArrayList<Task> listadoTasks;
     private ArrayList<Task> listadoTasksFiltered;
+    private OnItemTaskClickListener onItemTaskClickListener;
 
-    public TasksAdapter(ArrayList<Task> listadoTasks) {
+    public TasksAdapter(ArrayList<Task> listadoTasks, OnItemTaskClickListener onItemTaskClickListener) {
         this.listadoTasks = listadoTasks;
         this.listadoTasksFiltered = new ArrayList<>(listadoTasks);
+        this.onItemTaskClickListener = onItemTaskClickListener;
     }
 
     @NonNull
@@ -71,6 +74,17 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
             }else{
                 binding.imgCheckTodo.setImageResource(R.drawable.ic_check_false);
             }
+
+            binding.cvTask.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemTaskClickListener.onItemTaskClickListener(task);
+                }
+            });
         }
+    }
+
+    public interface OnItemTaskClickListener{
+        void onItemTaskClickListener(Task task);
     }
 }
