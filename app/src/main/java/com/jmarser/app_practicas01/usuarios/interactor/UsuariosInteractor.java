@@ -38,6 +38,13 @@ public interface UsuariosInteractor {
         void onErrorGetComments();
     }
 
+    void createPost(String title, String body, int userId, OnCreatePostCallBack callBack, OnErrorServer errorServer);
+
+    interface OnCreatePostCallBack{
+        void onSuccessCreatePost(Post post);
+        void onErrorCreatePost();
+    }
+
     interface OnErrorServer{
         void onErrorServer();
     }

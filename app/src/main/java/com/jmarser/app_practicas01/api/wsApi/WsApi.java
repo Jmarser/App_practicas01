@@ -12,7 +12,10 @@ import com.jmarser.app_practicas01.utils.Constantes;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -44,5 +47,9 @@ public interface WsApi {
 
     @GET(Constantes.GET_COMMENTS)
     Call<List<Comment>> getCommentsForPostId(@Query("postId") int postId);
+
+    @FormUrlEncoded
+    @POST(Constantes.CREATE_POSTS)
+    Call<Post> createPost(@Field("title") String title, @Field("body") String body, @Field("userId") int userId);
 
 }

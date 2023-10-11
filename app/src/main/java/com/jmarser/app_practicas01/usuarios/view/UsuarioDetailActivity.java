@@ -1,5 +1,6 @@
 package com.jmarser.app_practicas01.usuarios.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,7 +9,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.jmarser.app_practicas01.R;
 import com.jmarser.app_practicas01.api.models.Post;
@@ -140,6 +144,27 @@ public class UsuarioDetailActivity extends AppCompatActivity implements UsuarioD
         }else{
             binding.tvTodosEmpty.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.usuario_details_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if(itemId == R.id.create_post){
+            //Toast.makeText(this, "Pulsado el menu de crear", Toast.LENGTH_LONG).show();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(Constantes.BUNDLE_USUARIO, user);
+
+            Intent intent = new Intent(this, CreatePostActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

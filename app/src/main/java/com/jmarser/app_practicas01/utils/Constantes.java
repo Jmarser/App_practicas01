@@ -21,4 +21,5 @@ public class Constantes {
     public static final String GET_ALBUMS = "albums/";
     public static final String GET_ALBUMS_FOR_USER = "users/{userId}/albums";
     public static final String GET_PORTADAS_FOR_ALBUM = "albums/{albumId}/photos";
+    public static final String CREATE_POSTS = "posts/";
 }

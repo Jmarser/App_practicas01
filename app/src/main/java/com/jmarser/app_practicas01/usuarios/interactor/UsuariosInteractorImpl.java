@@ -1,5 +1,7 @@
 package com.jmarser.app_practicas01.usuarios.interactor;
 
+import android.util.Log;
+
 import com.jmarser.app_practicas01.api.models.Comment;
 import com.jmarser.app_practicas01.api.models.Post;
 import com.jmarser.app_practicas01.api.models.Task;
@@ -102,6 +104,27 @@ public class UsuariosInteractorImpl implements UsuariosInteractor{
 
             @Override
             public void onFailure(Call<List<Comment>> call, Throwable t) {
+                errorServer.onErrorServer();
+            }
+        });
+    }
+
+    @Override
+    public void createPost(String title, String body, int userId, OnCreatePostCallBack callBack, OnErrorServer errorServer) {
+        Call<Post> call = wsApi.createPost(title, body, userId);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if(response.isSuccessful()){
+                    Log.i("POST_CREADO", response.body().getTitle() + " " + response.body().getBody());
+                    callBack.onSuccessCreatePost(response.body());
+                }else{
+                    callBack.onErrorCreatePost();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
                 errorServer.onErrorServer();
             }
         });

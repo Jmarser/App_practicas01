@@ -27,12 +27,16 @@ import com.jmarser.app_practicas01.portadas.view.PortadasFragment;
 import com.jmarser.app_practicas01.portadas.view.PortadasView;
 import com.jmarser.app_practicas01.usuarios.interactor.UsuariosInteractor;
 import com.jmarser.app_practicas01.usuarios.interactor.UsuariosInteractorImpl;
+import com.jmarser.app_practicas01.usuarios.presenter.CreatePostPresenter;
+import com.jmarser.app_practicas01.usuarios.presenter.CreatePostPresenterImpl;
 import com.jmarser.app_practicas01.usuarios.presenter.PostDetailsPresenter;
 import com.jmarser.app_practicas01.usuarios.presenter.PostDetailsPresenterImpl;
 import com.jmarser.app_practicas01.usuarios.presenter.UsuarioDetailsPresenter;
 import com.jmarser.app_practicas01.usuarios.presenter.UsuarioDetailsPresenterImpl;
 import com.jmarser.app_practicas01.usuarios.presenter.UsuariosPresenter;
 import com.jmarser.app_practicas01.usuarios.presenter.UsuariosPresenterImpl;
+import com.jmarser.app_practicas01.usuarios.view.CreatePostActivity;
+import com.jmarser.app_practicas01.usuarios.view.CreatePostView;
 import com.jmarser.app_practicas01.usuarios.view.PostDetailsActivity;
 import com.jmarser.app_practicas01.usuarios.view.PostDetailsView;
 import com.jmarser.app_practicas01.usuarios.view.UsuarioDetailActivity;
@@ -56,6 +60,7 @@ public class AppModule {
     private PortadasFragment portadasFragment;
     private UsuarioDetailActivity usuarioDetailActivity;
     private PostDetailsActivity postDetailsActivity;
+    private CreatePostActivity createPostActivity;
 
     private Context context;
 
@@ -102,6 +107,11 @@ public class AppModule {
 
     public AppModule(PostDetailsActivity postDetailsActivity, Context context) {
         this.postDetailsActivity = postDetailsActivity;
+        this.context = context;
+    }
+
+    public AppModule(CreatePostActivity createPostActivity, Context context) {
+        this.createPostActivity = createPostActivity;
         this.context = context;
     }
 
@@ -181,6 +191,15 @@ public class AppModule {
 
     @Nullable
     @Provides
+    public CreatePostView createPostActivity(){
+        if (createPostActivity != null){
+            return createPostActivity;
+        }
+        return null;
+    }
+
+    @Nullable
+    @Provides
     public ErrorView provideErrorView(){
         if(splashActivity != null){
             return splashActivity;
@@ -196,6 +215,8 @@ public class AppModule {
             return usuarioDetailActivity;
         }else if (postDetailsActivity != null){
             return postDetailsActivity;
+        }else if(createPostActivity != null){
+            return createPostActivity;
         }
         return null;
     }
@@ -229,6 +250,11 @@ public class AppModule {
 
     @Provides
     public PostDetailsPresenter providesPostDetailsPresenter(PostDetailsPresenterImpl presenter){
+        return presenter;
+    }
+
+    @Provides
+    public CreatePostPresenter providesCreatePostPresenter(CreatePostPresenterImpl presenter){
         return presenter;
     }
 
