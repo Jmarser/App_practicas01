@@ -5,7 +5,7 @@ public class Constantes {
     // Fichero preferences
     public static final String PREFNAME = "Datos";
 
-    //Datos Intents
+    //Datos Intents y Bundle's
     public static final String INTENT_EMAIL = "email";
     public static final String INTENT_PASSWORD = "password";
     public static final String BUNDLE_USUARIO = "usuario";

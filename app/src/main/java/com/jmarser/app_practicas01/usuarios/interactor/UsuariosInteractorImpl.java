@@ -29,8 +29,7 @@ public class UsuariosInteractorImpl implements UsuariosInteractor{
 
     @Override
     public void getUsers(OnGetUsersCallBack callBack, OnErrorServer errorServer) {
-        Call<List<User>> call = wsApi.getAllUsers();
-        call.enqueue(new Callback<List<User>>() {
+        wsApi.getAllUsers().enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if(response.isSuccessful()){
@@ -51,8 +50,7 @@ public class UsuariosInteractorImpl implements UsuariosInteractor{
 
     @Override
     public void getPostsForUserID(int userId, OnGetPostsCallBack callBack, OnErrorServer errorServer) {
-        Call<List<Post>> call = wsApi.getPostsForUserId(userId);
-        call.enqueue(new Callback<List<Post>>() {
+        wsApi.getPostsForUserId(userId).enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if(response.isSuccessful()){
@@ -71,8 +69,7 @@ public class UsuariosInteractorImpl implements UsuariosInteractor{
 
     @Override
     public void getTodos(OnGetTodosCallBack callBack, OnErrorServer errorServer) {
-        Call<List<Task>> call = wsApi.getTasks();
-        call.enqueue(new Callback<List<Task>>() {
+        wsApi.getTasks().enqueue(new Callback<List<Task>>() {
             @Override
             public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
                 if(response.isSuccessful()){
@@ -91,8 +88,7 @@ public class UsuariosInteractorImpl implements UsuariosInteractor{
 
     @Override
     public void getCommentsForpstId(int postId, OnGetCommentsCallBack callBack, OnErrorServer errorServer) {
-        Call<List<Comment>> call = wsApi.getCommentsForPostId(postId);
-        call.enqueue(new Callback<List<Comment>>() {
+        wsApi.getCommentsForPostId(postId).enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
                 if(response.isSuccessful()){
@@ -111,8 +107,7 @@ public class UsuariosInteractorImpl implements UsuariosInteractor{
 
     @Override
     public void createPost(String title, String body, int userId, OnCreatePostCallBack callBack, OnErrorServer errorServer) {
-        Call<Post> call = wsApi.createPost(title, body, userId);
-        call.enqueue(new Callback<Post>() {
+        wsApi.createPost(title, body, userId).enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
                 if(response.isSuccessful()){
@@ -132,8 +127,7 @@ public class UsuariosInteractorImpl implements UsuariosInteractor{
 
     @Override
     public void editPost(int id, String title, String body, int userId, OnEditPostCallBack callBack, OnErrorServer errorServer) {
-        Call<Post> call = wsApi.editPost(id, id, title, body, userId);
-        call.enqueue(new Callback<Post>() {
+        wsApi.editPost(id, id, title, body, userId).enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
                 if (response.isSuccessful()){

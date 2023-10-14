@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Error
      * */
     private void initListeners(){
         binding.btnLogin.setOnClickListener(this);
+        //Gestionamos que cuando el TextInputLayout pierda el foco elimine el error que muestre
         binding.tilEmail.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {

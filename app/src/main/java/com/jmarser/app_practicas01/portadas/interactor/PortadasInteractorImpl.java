@@ -30,8 +30,7 @@ public class PortadasInteractorImpl implements PortadasInteractor{
 
     @Override
     public void getAllUsers(OnGetAllUsersCallBack callBack, OnErrorServer errorServer) {
-        Call<List<User>> call = wsApi.getAllUsers();
-        call.enqueue(new Callback<List<User>>() {
+        wsApi.getAllUsers().enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()){
@@ -50,8 +49,7 @@ public class PortadasInteractorImpl implements PortadasInteractor{
 
     @Override
     public void getAllAlbumes(OnGetAllAlbunesCallBack callBack, OnErrorServer errorServer) {
-        Call<List<Album>> call = wsApi.getAllAlbums();
-        call.enqueue(new Callback<List<Album>>() {
+        wsApi.getAllAlbums().enqueue(new Callback<List<Album>>() {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 if (response.isSuccessful()){
@@ -70,8 +68,7 @@ public class PortadasInteractorImpl implements PortadasInteractor{
 
     @Override
     public void getAlbumesForUserID(int userId, OnGetAllAlbunesCallBack callBack, OnErrorServer errorServer) {
-        Call<List<Album>> call = wsApi.getAlbumsForUser(userId);
-        call.enqueue(new Callback<List<Album>>() {
+        wsApi.getAlbumsForUser(userId).enqueue(new Callback<List<Album>>() {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 if (response.isSuccessful()){
@@ -90,8 +87,7 @@ public class PortadasInteractorImpl implements PortadasInteractor{
 
     @Override
     public void getAllPortadas(OnGetAllPortadasCallBack callBack, OnErrorServer errorServer) {
-        Call<List<Portada>> call = wsApi.getPortadas();
-        call.enqueue(new Callback<List<Portada>>() {
+        wsApi.getPortadas().enqueue(new Callback<List<Portada>>() {
             @Override
             public void onResponse(Call<List<Portada>> call, Response<List<Portada>> response) {
                 if(response.isSuccessful()){
@@ -110,8 +106,7 @@ public class PortadasInteractorImpl implements PortadasInteractor{
 
     @Override
     public void getPortadasForAlbumID(int albumId, OnGetAllPortadasCallBack callBack, OnErrorServer errorServer) {
-        Call<List<Portada>> call = wsApi.getPortadasForAlbum(albumId);
-        call.enqueue(new Callback<List<Portada>>() {
+        wsApi.getPortadasForAlbum(albumId).enqueue(new Callback<List<Portada>>() {
             @Override
             public void onResponse(Call<List<Portada>> call, Response<List<Portada>> response) {
                 if (response.isSuccessful()){
