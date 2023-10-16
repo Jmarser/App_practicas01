@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 
-public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener {
+public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener, AlbumAdapter.OnMessageEmpty {
 
     @Inject
     SharedPreferences sharedPreferences;
@@ -45,6 +45,7 @@ public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView,
     private ArrayList<Album> listadoAlbunes;
     private AlbumAdapter albumAdapter;
     private int userId = -1;
+    private String albumFilter = "";
 
 
     public AlbunesFragment() {
@@ -117,17 +118,27 @@ public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView,
         if(listadoAlbunes != null && listadoAlbunes.size() > 0){
 
             binding.rvAlbunes.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-            albumAdapter = new AlbumAdapter(listadoAlbunes);
+            albumAdapter = new AlbumAdapter(listadoAlbunes, this);
             binding.rvAlbunes.setAdapter(albumAdapter);
+            hiddeMessageEmpty();
 
-            Log.i("TAMAÑO", ""+albumAdapter.getItemCount());
+            if(!albumFilter.isEmpty()){
+                albumAdapter.getFilter().filter(albumFilter);
+            }
 
-            binding.tvRvAlbumEmpty.setVisibility(View.GONE);
-            binding.rvAlbunes.setVisibility(View.VISIBLE);
         }else{
-            binding.tvRvAlbumEmpty.setVisibility(View.VISIBLE);
-            binding.rvAlbunes.setVisibility(View.INVISIBLE);
+            showMessageEmpty();
         }
+    }
+
+    private void showMessageEmpty(){
+        binding.tvRvAlbumEmpty.setVisibility(View.VISIBLE);
+        binding.rvAlbunes.setVisibility(View.INVISIBLE);
+    }
+
+    private void hiddeMessageEmpty(){
+        binding.tvRvAlbumEmpty.setVisibility(View.GONE);
+        binding.rvAlbunes.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -167,6 +178,7 @@ public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView,
         }else{
             albunesPresenter.getAlbunesForUserID(userId);
         }
+
         binding.pbRecyclerAlbunes.setVisibility(View.VISIBLE);
         binding.srlAlbunes.setRefreshing(false);
     }
@@ -211,8 +223,17 @@ public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView,
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        albumAdapter.filtrado(newText);
-        initRecyclerAlbunes();
+        albumFilter = newText;
+        albumAdapter.getFilter().filter(newText);
         return false;
+    }
+
+    @Override
+    public void onMessageEmpty(Boolean visible) {
+        if(visible){
+            showMessageEmpty();
+        }else{
+            hiddeMessageEmpty();
+        }
     }
 }

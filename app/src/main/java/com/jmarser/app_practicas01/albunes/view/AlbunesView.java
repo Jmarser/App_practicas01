@@ -10,4 +10,5 @@ public interface AlbunesView {
     void setGetAllUsers(ArrayList<User> listadoUsuarios);
 
     void setGetAllAlbunes(ArrayList<Album> listadoAlbunes);
+
 }

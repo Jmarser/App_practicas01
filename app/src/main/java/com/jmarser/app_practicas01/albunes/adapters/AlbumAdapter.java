@@ -2,25 +2,32 @@ package com.jmarser.app_practicas01.albunes.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.jmarser.app_practicas01.albunes.view.AlbunesView;
 import com.jmarser.app_practicas01.api.models.Album;
+import com.jmarser.app_practicas01.api.models.User;
 import com.jmarser.app_practicas01.databinding.RowAlbumBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
+public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> implements Filterable {
 
     private ArrayList<Album> listadoAlbumes;
     private ArrayList<Album> listadoFiltrado;
+    OnMessageEmpty onMessageEmpty;
 
-    public AlbumAdapter(ArrayList<Album> listadoAlbunes) {
+    public AlbumAdapter(ArrayList<Album> listadoAlbunes, OnMessageEmpty onMessageEmpty) {
         this.listadoAlbumes = listadoAlbunes;
-        listadoFiltrado = new ArrayList<>(listadoAlbunes);
+        //listadoFiltrado = new ArrayList<>(listadoAlbunes);
+        this.listadoFiltrado = listadoAlbunes;
+        this.onMessageEmpty = onMessageEmpty;
     }
 
     @NonNull
@@ -41,17 +48,40 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         return listadoAlbumes.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence textFilter) {
+                FilterResults filterResults = new FilterResults();
+                if(textFilter == null || textFilter.length() == 0){
+                    filterResults.count = listadoFiltrado.size();
+                    filterResults.values = listadoFiltrado;
+                }else{
+                    ArrayList<Album> resultFiltered = new ArrayList<>();
+                    /*for(Album album: listadoFiltrado){
+                        if(album.getTitle().toLowerCase().contains(textFilter.toString().toLowerCase())){
+                            resultFiltered.add(album);
+                        }
+                    }*/
+                    List<Album> collection = listadoFiltrado.stream()
+                            .filter(album -> album.getTitle().toLowerCase().contains(textFilter.toString().toLowerCase())).collect(Collectors.toList());
+                    resultFiltered.addAll(collection);
 
-    public void filtrado(String filtro){
-        listadoAlbumes.clear();
-        if(filtro.length() == 0){
-            listadoAlbumes.addAll(listadoFiltrado);
-        }else{
-            List<Album> collection = listadoFiltrado.stream()
-                    .filter(album -> album.getTitle().toLowerCase().contains(filtro.toLowerCase())).collect(Collectors.toList());
-            listadoAlbumes.addAll(collection);
-        }
-        notifyDataSetChanged();
+                    filterResults.count = resultFiltered.size();
+                    filterResults.values = resultFiltered;
+                }
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                listadoAlbumes = (ArrayList<Album>) results.values;
+                onMessageEmpty.onMessageEmpty(listadoAlbumes.isEmpty());
+                notifyDataSetChanged();
+            }
+        };
+        return filter;
     }
 
     class AlbumViewHolder extends RecyclerView.ViewHolder{
@@ -66,5 +96,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         public void bindAlbum(Album album){
             binding.tvTitleAlbum.setText(album.getTitle());
         }
+    }
+
+    public interface OnMessageEmpty{
+        void onMessageEmpty(Boolean visible);
     }
 }
