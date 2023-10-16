@@ -3,10 +3,13 @@ package com.jmarser.app_practicas01.albunes.view;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +32,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 
-public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener {
 
     @Inject
     SharedPreferences sharedPreferences;
@@ -89,6 +92,7 @@ public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView,
     private void initListener(){
         binding.srlAlbunes.setOnRefreshListener(this);
         binding.spnAutores.setOnItemSelectedListener(this);
+        binding.searchAlbum.setOnQueryTextListener(this);
     }
 
     private void initSpinnerUsuarios(){
@@ -111,9 +115,13 @@ public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView,
     private void initRecyclerAlbunes(){
         binding.pbRecyclerAlbunes.setVisibility(View.GONE);
         if(listadoAlbunes != null && listadoAlbunes.size() > 0){
+
             binding.rvAlbunes.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
             albumAdapter = new AlbumAdapter(listadoAlbunes);
             binding.rvAlbunes.setAdapter(albumAdapter);
+
+            Log.i("TAMAÑO", ""+albumAdapter.getItemCount());
+
             binding.tvRvAlbumEmpty.setVisibility(View.GONE);
             binding.rvAlbunes.setVisibility(View.VISIBLE);
         }else{
@@ -194,5 +202,17 @@ public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView,
     @Override
     public void errorServer() {
         binding.layoutError.clError.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        albumAdapter.filtrado(newText);
+        initRecyclerAlbunes();
+        return false;
     }
 }

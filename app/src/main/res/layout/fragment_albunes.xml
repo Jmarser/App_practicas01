@@ -46,6 +46,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spn_autores" />
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_album"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Buscar por nombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_cabeceraAlbunes" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srl_albunes"
         android:layout_width="0dp"
@@ -54,7 +65,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_cabeceraAlbunes" >
+        app:layout_constraintTop_toBottomOf="@+id/search_album" >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_albunes"

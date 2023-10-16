@@ -10,13 +10,17 @@ import com.jmarser.app_practicas01.api.models.Album;
 import com.jmarser.app_practicas01.databinding.RowAlbumBinding;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
 
-    private ArrayList<Album> listadoAlbunes;
+    private ArrayList<Album> listadoAlbumes;
+    private ArrayList<Album> listadoFiltrado;
 
     public AlbumAdapter(ArrayList<Album> listadoAlbunes) {
-        this.listadoAlbunes = listadoAlbunes;
+        this.listadoAlbumes = listadoAlbunes;
+        listadoFiltrado = new ArrayList<>(listadoAlbunes);
     }
 
     @NonNull
@@ -29,12 +33,25 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 
     @Override
     public void onBindViewHolder(@NonNull AlbumViewHolder holder, int position) {
-        holder.bindAlbum(listadoAlbunes.get(position));
+        holder.bindAlbum(listadoAlbumes.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return listadoAlbunes.size();
+        return listadoAlbumes.size();
+    }
+
+
+    public void filtrado(String filtro){
+        listadoAlbumes.clear();
+        if(filtro.length() == 0){
+            listadoAlbumes.addAll(listadoFiltrado);
+        }else{
+            List<Album> collection = listadoFiltrado.stream()
+                    .filter(album -> album.getTitle().toLowerCase().contains(filtro.toLowerCase())).collect(Collectors.toList());
+            listadoAlbumes.addAll(collection);
+        }
+        notifyDataSetChanged();
     }
 
     class AlbumViewHolder extends RecyclerView.ViewHolder{
