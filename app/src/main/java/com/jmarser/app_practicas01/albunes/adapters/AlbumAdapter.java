@@ -25,7 +25,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 
     public AlbumAdapter(ArrayList<Album> listadoAlbunes, OnMessageEmpty onMessageEmpty) {
         this.listadoAlbumes = listadoAlbunes;
-        //listadoFiltrado = new ArrayList<>(listadoAlbunes);
         this.listadoFiltrado = listadoAlbunes;
         this.onMessageEmpty = onMessageEmpty;
     }
@@ -51,29 +50,29 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     @Override
     public Filter getFilter() {
         Filter filter = new Filter() {
+            // Método que hace el filtrado
             @Override
             protected FilterResults performFiltering(CharSequence textFilter) {
                 FilterResults filterResults = new FilterResults();
-                if(textFilter == null || textFilter.length() == 0){
+
+                if(textFilter == null || textFilter.length() == 0){ // no hay texto para el filtrado
                     filterResults.count = listadoFiltrado.size();
                     filterResults.values = listadoFiltrado;
-                }else{
-                    ArrayList<Album> resultFiltered = new ArrayList<>();
-                    /*for(Album album: listadoFiltrado){
-                        if(album.getTitle().toLowerCase().contains(textFilter.toString().toLowerCase())){
-                            resultFiltered.add(album);
-                        }
-                    }*/
+
+                }else{ // hay texto para realizar el filtrado
+
+                    ArrayList<Album> resultData = new ArrayList<>();
+
                     List<Album> collection = listadoFiltrado.stream()
                             .filter(album -> album.getTitle().toLowerCase().contains(textFilter.toString().toLowerCase())).collect(Collectors.toList());
-                    resultFiltered.addAll(collection);
+                    resultData.addAll(collection);
 
-                    filterResults.count = resultFiltered.size();
-                    filterResults.values = resultFiltered;
+                    filterResults.count = resultData.size();
+                    filterResults.values = resultData;
                 }
                 return filterResults;
             }
-
+            // Método que publica la respuesta
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 listadoAlbumes = (ArrayList<Album>) results.values;
@@ -84,7 +83,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         return filter;
     }
 
-    class AlbumViewHolder extends RecyclerView.ViewHolder{
+    static class AlbumViewHolder extends RecyclerView.ViewHolder{
 
         private RowAlbumBinding binding;
 
@@ -98,6 +97,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         }
     }
 
+    //Interface con la que vamos a comunicarnos con la vista para mostrar el mensaje de listado vacío
     public interface OnMessageEmpty{
         void onMessageEmpty(Boolean visible);
     }

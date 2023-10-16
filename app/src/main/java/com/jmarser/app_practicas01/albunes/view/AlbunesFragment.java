@@ -122,6 +122,7 @@ public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView,
             binding.rvAlbunes.setAdapter(albumAdapter);
             hiddeMessageEmpty();
 
+            // Si hay texto para el filtrado, solicitamos el filtrado.
             if(!albumFilter.isEmpty()){
                 albumAdapter.getFilter().filter(albumFilter);
             }
@@ -173,9 +174,10 @@ public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView,
 
     @Override
     public void onRefresh() {
+        // Si no hay usuario seleccionado pedimos todos los albumes
         if(userId == -1){
             albunesPresenter.getAllAlbunes();
-        }else{
+        }else{ // pedimos los albumes del usuario seleccionado.
             albunesPresenter.getAlbunesForUserID(userId);
         }
 
