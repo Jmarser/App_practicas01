@@ -24,6 +24,7 @@ import com.jmarser.app_practicas01.databinding.FragmentAlbunesBinding;
 import com.jmarser.app_practicas01.di.appComponent.AppComponent;
 import com.jmarser.app_practicas01.di.appComponent.DaggerAppComponent;
 import com.jmarser.app_practicas01.di.appModule.AppModule;
+import com.jmarser.app_practicas01.di.appModule.ConnectionModule;
 import com.jmarser.app_practicas01.di.appModule.SharedPreferencesModule;
 import com.jmarser.app_practicas01.utils.ErrorView;
 
@@ -84,6 +85,7 @@ public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView,
     private void initInjection(){
         AppComponent appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this, getContext()))
+                .connectionModule(new ConnectionModule())
                 .sharedPreferencesModule(new SharedPreferencesModule(getContext()))
                 .build();
 

@@ -15,6 +15,7 @@ import com.jmarser.app_practicas01.databinding.ActivityPostDetailsBinding;
 import com.jmarser.app_practicas01.di.appComponent.AppComponent;
 import com.jmarser.app_practicas01.di.appComponent.DaggerAppComponent;
 import com.jmarser.app_practicas01.di.appModule.AppModule;
+import com.jmarser.app_practicas01.di.appModule.ConnectionModule;
 import com.jmarser.app_practicas01.di.appModule.SharedPreferencesModule;
 import com.jmarser.app_practicas01.usuarios.adapters.CommentAdapter;
 import com.jmarser.app_practicas01.usuarios.presenter.PostDetailsPresenter;
@@ -64,6 +65,7 @@ public class PostDetailsActivity extends AppCompatActivity implements PostDetail
     private void initInjection(){
         AppComponent appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this, this))
+                .connectionModule(new ConnectionModule())
                 .sharedPreferencesModule(new SharedPreferencesModule(this))
                 .build();
 

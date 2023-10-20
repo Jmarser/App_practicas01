@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="LISTADO ÁLBUNES"
+        android:text="LISTADO ÁLBUMES"
         android:textAlignment="center"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -46,16 +46,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spn_autores" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_album"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="Buscar por nombre"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_cabeceraAlbunes" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_cabeceraAlbunes">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Buscar por nombre"
+            android:background="@color/white"/>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srl_albunes"
@@ -65,7 +75,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_album" >
+        app:layout_constraintTop_toBottomOf="@+id/cv_searchView" >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_albunes"

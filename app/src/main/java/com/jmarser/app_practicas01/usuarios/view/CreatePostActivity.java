@@ -14,6 +14,7 @@ import com.jmarser.app_practicas01.databinding.ActivityCreatePostBinding;
 import com.jmarser.app_practicas01.di.appComponent.AppComponent;
 import com.jmarser.app_practicas01.di.appComponent.DaggerAppComponent;
 import com.jmarser.app_practicas01.di.appModule.AppModule;
+import com.jmarser.app_practicas01.di.appModule.ConnectionModule;
 import com.jmarser.app_practicas01.di.appModule.SharedPreferencesModule;
 import com.jmarser.app_practicas01.usuarios.presenter.CreatePostPresenter;
 import com.jmarser.app_practicas01.utils.Constantes;
@@ -58,6 +59,7 @@ public class CreatePostActivity extends AppCompatActivity implements CreatePostV
     private void initInjection(){
         AppComponent appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this, this))
+                .connectionModule(new ConnectionModule())
                 .sharedPreferencesModule(new SharedPreferencesModule(this))
                 .build();
 

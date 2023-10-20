@@ -17,6 +17,7 @@ import com.jmarser.app_practicas01.databinding.FragmentUsuariosBinding;
 import com.jmarser.app_practicas01.di.appComponent.AppComponent;
 import com.jmarser.app_practicas01.di.appComponent.DaggerAppComponent;
 import com.jmarser.app_practicas01.di.appModule.AppModule;
+import com.jmarser.app_practicas01.di.appModule.ConnectionModule;
 import com.jmarser.app_practicas01.di.appModule.SharedPreferencesModule;
 import com.jmarser.app_practicas01.usuarios.adapters.UsuariosAdapter;
 import com.jmarser.app_practicas01.usuarios.presenter.UsuariosPresenter;
@@ -75,6 +76,7 @@ public class UsuariosFragment extends Fragment implements UsuariosView, ErrorVie
     private void initInjection(){
         AppComponent appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this, getContext()))
+                .connectionModule(new ConnectionModule())
                 .sharedPreferencesModule(new SharedPreferencesModule(getContext()))
                 .build();
 

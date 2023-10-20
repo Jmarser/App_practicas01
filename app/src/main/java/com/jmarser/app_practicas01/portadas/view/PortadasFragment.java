@@ -21,6 +21,7 @@ import com.jmarser.app_practicas01.databinding.FragmentPortadasBinding;
 import com.jmarser.app_practicas01.di.appComponent.AppComponent;
 import com.jmarser.app_practicas01.di.appComponent.DaggerAppComponent;
 import com.jmarser.app_practicas01.di.appModule.AppModule;
+import com.jmarser.app_practicas01.di.appModule.ConnectionModule;
 import com.jmarser.app_practicas01.di.appModule.SharedPreferencesModule;
 import com.jmarser.app_practicas01.portadas.adapters.PortadasAdapter;
 import com.jmarser.app_practicas01.portadas.presenter.PortadasPresenter;
@@ -88,6 +89,7 @@ public class PortadasFragment extends Fragment implements PortadasView, ErrorVie
     private void initinjection(){
         AppComponent appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this, getContext()))
+                .connectionModule(new ConnectionModule())
                 .sharedPreferencesModule(new SharedPreferencesModule(getContext()))
                 .build();
 

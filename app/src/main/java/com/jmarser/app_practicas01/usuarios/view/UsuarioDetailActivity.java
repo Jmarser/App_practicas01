@@ -22,6 +22,7 @@ import com.jmarser.app_practicas01.databinding.ActivityUsuarioDetailBinding;
 import com.jmarser.app_practicas01.di.appComponent.AppComponent;
 import com.jmarser.app_practicas01.di.appComponent.DaggerAppComponent;
 import com.jmarser.app_practicas01.di.appModule.AppModule;
+import com.jmarser.app_practicas01.di.appModule.ConnectionModule;
 import com.jmarser.app_practicas01.di.appModule.SharedPreferencesModule;
 import com.jmarser.app_practicas01.usuarios.adapters.TasksAdapter;
 import com.jmarser.app_practicas01.usuarios.adapters.UserDetailsAdapter;
@@ -77,6 +78,7 @@ public class UsuarioDetailActivity extends AppCompatActivity implements UsuarioD
     private void initInjection(){
         AppComponent appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this, this))
+                .connectionModule(new ConnectionModule())
                 .sharedPreferencesModule(new SharedPreferencesModule(this))
                 .build();
 

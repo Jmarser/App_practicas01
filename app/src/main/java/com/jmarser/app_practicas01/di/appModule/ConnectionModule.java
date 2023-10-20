@@ -19,6 +19,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class ConnectionModule {
 
+    private String urlBase;
+
+    public ConnectionModule() {
+        this.urlBase = Constantes.SERVER_URL;
+    }
+
+    public ConnectionModule(String urlBase) {
+        if(!urlBase.isEmpty()) {
+            this.urlBase = urlBase;
+        }else{
+            this.urlBase = Constantes.SERVER_URL;
+        }
+    }
+
     @Provides
     @Singleton
     public WsApi providesApi(){
@@ -39,7 +53,8 @@ public class ConnectionModule {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl(Constantes.SERVER_URL)
+                //.baseUrl(Constantes.SERVER_URL)
+                .baseUrl(this.urlBase)
                 .client(okHttpClient)
                 .build();
 
