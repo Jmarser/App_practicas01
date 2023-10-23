@@ -37,7 +37,7 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
 
     @Override
     public int getItemCount() {
-        return this.listadoPosts.size();
+        return this.listadoPosts == null ? 0:listadoPosts.size();
     }
 
 

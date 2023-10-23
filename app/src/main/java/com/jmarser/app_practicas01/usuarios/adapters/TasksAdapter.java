@@ -42,7 +42,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
 
     @Override
     public int getItemCount() {
-        return listadoTasksFiltered.size();
+        return listadoTasksFiltered == null ? 0:listadoTasks.size();
     }
 
     public void filtrarTasksForUser(User user){
