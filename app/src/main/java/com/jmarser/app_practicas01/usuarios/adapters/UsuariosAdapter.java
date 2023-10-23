@@ -37,7 +37,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.Usuari
 
     @Override
     public int getItemCount() {
-        return this.listaUsuarios.size();
+        return this.listaUsuarios == null ? 0:listaUsuarios.size();
     }
 
 
