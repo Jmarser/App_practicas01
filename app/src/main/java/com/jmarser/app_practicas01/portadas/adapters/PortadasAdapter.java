@@ -25,6 +25,7 @@ public class PortadasAdapter extends RecyclerView.Adapter<PortadasAdapter.Portad
     public PortadaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         RowPortadaBinding binding = RowPortadaBinding.inflate(inflater, parent, false);
+
         return new PortadaViewHolder(binding);
     }
 
@@ -35,7 +36,7 @@ public class PortadasAdapter extends RecyclerView.Adapter<PortadasAdapter.Portad
 
     @Override
     public int getItemCount() {
-        return portadas.size();
+        return portadas == null ? 0 : portadas.size();
     }
 
     class PortadaViewHolder extends RecyclerView.ViewHolder{
