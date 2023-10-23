@@ -35,7 +35,7 @@ public class PortadasAdapter extends RecyclerView.Adapter<PortadasAdapter.Portad
 
     @Override
     public int getItemCount() {
-        return portadas.size();
+        return portadas == null ? 0:portadas.size();
     }
 
     class PortadaViewHolder extends RecyclerView.ViewHolder{
