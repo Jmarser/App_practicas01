@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:paddingStart="10dp"
-        android:text="Seleccione un usuario:"
+        android:text="@string/seleccione_usuario"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:paddingStart="10dp"
-        android:text="Seleccione un album:"
+        android:text="@string/seleccione_un_album"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:padding="5dp"
-        android:text="PORTADAS"
+        android:text="@string/portadas"
         android:textAlignment="center"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -80,7 +80,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textCabeceraPortada"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toTopOf="@+id/ll_numPortadas">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_portadas"
@@ -90,9 +90,37 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp"/>
+            android:paddingEnd="16dp" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_numPortadas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/numero_portadas_listadas"
+            android:textAlignment="textEnd"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_numPortadas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0000"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/pb_recyclerPortadas"
@@ -108,7 +136,7 @@
         android:id="@+id/tv_rvPortadas_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No hay portadas disponibles"
+        android:text="@string/no_hay_portadas_disponibles"
         android:textSize="26sp"
         android:textStyle="bold"
         android:textAlignment="center"

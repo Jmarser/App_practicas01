@@ -1,5 +1,39 @@
 <resources>
     <string name="app_name">App_practicas01</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="titulo_post">Título</string>
+    <string name="mensaje_post">Mensaje</string>
+    <string name="crear_post">Crear Post</string>
+    <string name="titulo">Título:</string>
+    <string name="texto_de_prueba">Texto de prueba</string>
+    <string name="post">Post:</string>
+    <string name="comentarios">COMENTARIOS</string>
+    <string name="no_hay_comentarios">No hay comentarios</string>
+    <string name="nombre">Nombre:</string>
+    <string name="nombre_de_usuario">Nombre de usuario:</string>
+    <string name="posts">POSTS</string>
+    <string name="no_hay_posts_disponibles">No hay posts disponibles</string>
+    <string name="listado_tareas">Listado tareas</string>
+    <string name="no_hay_tareas_disponibles">No hay tareas disponibles</string>
+    <string name="description_img">todo</string>
+    <string name="error_del_servidor">ERROR DEL SERVIDOR</string>
+    <string name="reintentar">Reintentar</string>
+    <string name="seleccione_usuario">Seleccione usuario:</string>
+    <string name="listado_lbumes">LISTADO ÁLBUMES</string>
+    <string name="buscar_por_nombre">Buscar por nombre</string>
+    <string name="no_hay_albunes_que_mostrar">No hay albunes que mostrar</string>
+    <string name="seleccione_un_album">Seleccione un album:</string>
+    <string name="portadas">PORTADAS</string>
+    <string name="no_hay_portadas_disponibles">No hay portadas disponibles</string>
+    <string name="no_hay_usuarios_para_mostrar">NO HAY USUARIOS PARA MOSTRAR</string>
+    <string name="titulo_album">Título album:</string>
+    <string name="autor">Autor:</string>
+    <string name="comentario">Comentario:</string>
+    <string name="name">name</string>
+    <string name="website">website</string>
+    <string name="numero_albumes_listados">Nº de albumes listados:</string>
+    <string name="numero_portadas_listadas">Nº de portadas listadas:</string>
 </resources>

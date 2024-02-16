@@ -144,6 +144,7 @@ public class PortadasFragment extends Fragment implements PortadasView, ErrorVie
             binding.rvPortadas.setAdapter(portadasAdapter);
             binding.tvRvPortadasEmpty.setVisibility(View.GONE);
             binding.srlPortadas.setRefreshing(false);
+            binding.tvNumPortadas.setText(""+portadasAdapter.getItemCount());
         }else{
             binding.tvRvPortadasEmpty.setVisibility(View.VISIBLE);
         }

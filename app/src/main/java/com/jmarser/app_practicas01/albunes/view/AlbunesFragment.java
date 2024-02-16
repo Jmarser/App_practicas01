@@ -122,6 +122,7 @@ public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView,
             binding.rvAlbunes.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
             albumAdapter = new AlbumAdapter(listadoAlbunes, this);
             binding.rvAlbunes.setAdapter(albumAdapter);
+            binding.tvNumAlbumes.setText(""+albumAdapter.getItemCount());
             hiddeMessageEmpty();
 
             // Si hay texto para el filtrado, solicitamos el filtrado.
@@ -234,10 +235,12 @@ public class AlbunesFragment extends Fragment implements AlbunesView, ErrorView,
 
     @Override
     public void onMessageEmpty(Boolean visible) {
+        binding.tvNumAlbumes.setText(""+albumAdapter.getItemCount());
         if(visible){
             showMessageEmpty();
         }else{
             hiddeMessageEmpty();
         }
     }
+
 }

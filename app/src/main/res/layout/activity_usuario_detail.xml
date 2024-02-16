@@ -24,7 +24,7 @@
             android:layout_marginStart="16dp"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:text="Nombre:" />
+            android:text="@string/nombre" />
 
         <TextView
             android:id="@+id/tv_nombre"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
-            android:text="nombre"
+            android:text="@string/texto_de_prueba"
             android:textSize="20sp"
             android:textStyle="bold"/>
 
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
-            android:text="Nombre de usuario:"
+            android:text="@string/nombre_de_usuario"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
-            android:text="usuario"
+            android:text="@string/texto_de_prueba"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -62,7 +62,7 @@
         android:id="@+id/cabecera_posts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="POSTS"
+        android:text="@string/posts"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textAlignment="center"
@@ -99,7 +99,7 @@
         android:id="@+id/tv_details_user_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No hay posts disponibles"
+        android:text="@string/no_hay_posts_disponibles"
         android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="gone"
@@ -113,7 +113,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Listado tareas"
+        android:text="@string/listado_tareas"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textAlignment="center"
@@ -150,7 +150,7 @@
         android:id="@+id/tv_todos_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No hay tareas disponibles"
+        android:text="@string/no_hay_tareas_disponibles"
         android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="gone"

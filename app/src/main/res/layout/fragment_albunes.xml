@@ -14,7 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Seleccione usuario:"
+        android:text="@string/seleccione_usuario"
         android:paddingStart="10dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="LISTADO ÁLBUMES"
+        android:text="@string/listado_lbumes"
         android:textAlignment="center"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -62,7 +62,7 @@
             android:id="@+id/search_album"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Buscar por nombre"
+            android:hint="@string/buscar_por_nombre"
             android:background="@color/white"/>
 
     </androidx.cardview.widget.CardView>
@@ -72,19 +72,48 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ll_num_albumes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_searchView" >
+        app:layout_constraintTop_toBottomOf="@+id/cv_searchView">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_albunes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5dp"
-            tools:listitem="@layout/row_album"/>
+            tools:listitem="@layout/row_album" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_num_albumes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/numero_albumes_listados"
+            android:textAlignment="textEnd"
+            android:layout_weight="1"
+            android:paddingEnd="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_numAlbumes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="000"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/pb_recyclerAlbunes"
@@ -100,7 +129,7 @@
         android:id="@+id/tv_rvAlbum_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No hay albunes que mostrar"
+        android:text="@string/no_hay_albunes_que_mostrar"
         android:textAlignment="center"
         android:textSize="26sp"
         android:textStyle="bold"

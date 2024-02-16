@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="8dp"
-            android:hint="Título"
+            android:hint="@string/titulo_post"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -37,7 +37,7 @@
             android:id="@+id/til_mensajePost"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Mensaje"
+            android:hint="@string/mensaje_post"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Crear Post"
+            android:text="@string/crear_post"
             android:layout_gravity="center"/>
 
     </LinearLayout>
